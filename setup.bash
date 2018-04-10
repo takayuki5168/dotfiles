@@ -2,7 +2,7 @@ sudo apt-get install -y vim emacs24
 echo "alias emacs='emacs -nw \$2'" >> ~/.bashrc
 source ~/.bashrc
 
-sudo apt-get install -y gnome-tweak-tool ibus-mozc
+sudo apt-get install -y gnome-tweak-tool ibus-mozc curl
 
 sudo apt-get install -y cmake git clang-format-3.7
 sudo ln -s /usr/bin/clang-format-3.7 /usr/bin/clang-format
@@ -16,7 +16,7 @@ sudo apt install -y doxygen graphviz
 sudo apt install -y qt5-default
 sudo apt install -y gcc-arm-none-eabi
 
-sudo apt-get install -y zsh fish tmux
+sudo apt-get install -y zsh fish tmux gnuplot
 
 sudo snap install slack --classic
 
@@ -24,4 +24,5 @@ sudo snap install slack --classic
 
 # その他
 # mozcの設定
+# Nodejsのインストール
 # chromium, Slack, LINEのインストール

@@ -170,7 +170,6 @@ alias vi='vim'
 alias nv='vim'
 
 # Environment variables
-PATH+=":${HOME}/.robotech/bin"
 
 ## ssh先の場合tmux自動起動
 #if [[ -n "${REMOTEHOST}${SSH_CONNECTION}" && -z "$TMUX" && -z "$STY" ]] && type tmux >/dev/null 2>&1; then
