@@ -1,0 +1,9 @@
+[user]
+	email = takayuki5168@gmail.com
+	name = Takayuki Murooka
+
+[http]
+	sslVerify = false
+
+[credential]
+    helper = cache --timeout=3600
