@@ -11,7 +11,7 @@ sudo apt-get install -y cmake git clang-format-3.7
 sudo ln -s /usr/bin/clang-format-3.7 /usr/bin/clang-format
 sudo apt install -y libboost-all-dev
 
-sudo apt install -y python3-pip
+sudo apt-get install -y ipython ipython3 python-pip python3-pip
 sudo pip3 install numpy scipy sklearn matplotlib keras tensorflow
 
 git config --global user.name "Takayuki Murooka"
