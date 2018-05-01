@@ -2,7 +2,10 @@ sudo apt-get install -y vim emacs24
 echo "alias emacs='emacs -nw \$2'" >> ~/.bashrc
 source ~/.bashrc
 
-sudo apt-get install -y gnome-tweak-tool ibus-mozc curl
+sudo apt-get install -y gnome-tweak-tool curl
+
+sudo apt-get install ibus-mozc
+# GUIでmozcの追加
 
 sudo apt-get install -y cmake git clang-format-3.7
 sudo ln -s /usr/bin/clang-format-3.7 /usr/bin/clang-format
@@ -23,10 +26,10 @@ sudo apt-get install -y zsh fish tmux gnuplot
 
 sudo snap install slack --classic
 sudo snap install heroku --classic
+sudo apt-get install chromium-browser
 
 
 
 # その他
-# mozcの設定
 # Nodejsのインストール
-# chromium, Slack, LINEのインストール
+# LINEのインストール
