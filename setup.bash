@@ -4,7 +4,7 @@ source ~/.bashrc
 
 sudo apt-get install -y gnome-tweak-tool curl
 
-sudo apt-get install ibus-mozc
+sudo apt-get install -y ibus-mozc
 # GUIでmozcの追加
 
 sudo apt-get install -y cmake git clang-format-3.7
