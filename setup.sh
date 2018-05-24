@@ -26,7 +26,7 @@ sudo apt-get install -y zsh fish tmux gnuplot
 
 sudo snap install slack --classic
 sudo snap install heroku --classic
-sudo apt-get install chromium-browser
+sudo apt-get install -y chromium-browser
 
 
 
