@@ -1,6 +1,5 @@
 sudo apt-get install -y vim emacs24
-echo "alias emacs='emacs -nw \$2'" >> ~/.bashrc
-echo "alias suspend='systemctl suspend -i'" >> ~/.bashrc
+#echo "alias suspend='systemctl suspend -i'" >> ~/.bashrc
 
 sudo apt-get install -y gnome-tweak-tool curl
 sudo apt-get install -y ibus-mozc
