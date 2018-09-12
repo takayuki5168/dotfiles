@@ -115,7 +115,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-alias emacs='emacs -nw $1'
 alias suspend='systemctl suspend'
 
 source /opt/ros/kinetic/setup.bash
