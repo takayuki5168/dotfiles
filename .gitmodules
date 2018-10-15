@@ -1,0 +1,3 @@
+[submodule ".emacs.d/.emacs-trr"]
+	path = .emacs.d/.emacs-trr
+	url = https://github.com/kawabata/emacs-trr.git
