@@ -1,7 +1,7 @@
 sudo apt-get install -y vim emacs24
 #echo "alias suspend='systemctl suspend -i'" >> ~/.bashrc
 
-#sudo apt-get install -y gnome-tweak-tool curl
+sudo apt-get install -y gnome-tweak-tool curl
 #sudo apt-get install -y ibus-mozc
 # GUIでmozcの追加
 
