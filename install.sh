@@ -36,3 +36,8 @@ source ~/.bashrc
 # その他
 # Nodejsのインストール
 # LINEのインストール
+
+
+# ROS
+# sudo apt-get install ros-kinetic-desktop-full
+# sudo apt-get install python-catkin-tools
