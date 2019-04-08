@@ -5,5 +5,7 @@
 [http]
 	sslVerify = false
 
+[core]
+	editor = emacs -nw
 [credential]
     helper = cache --timeout=3600

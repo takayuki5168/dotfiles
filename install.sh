@@ -18,7 +18,7 @@ git config --global http.sslVerify false
 #sudo apt install -y doxygen graphviz
 #sudo apt install -y qt5-default
 
-sudo apt-get install -y zsh fish tmux gnuplot
+sudo apt-get install -y zsh tmux gnuplot
 
 #sudo snap install slack --classic
 #sudo snap install heroku --classic
