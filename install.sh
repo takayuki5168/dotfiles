@@ -17,7 +17,6 @@ git config --global http.sslVerify false
 
 #sudo apt install -y doxygen graphviz
 #sudo apt install -y qt5-default
-#sudo apt install -y gcc-arm-none-eabi
 
 sudo apt-get install -y zsh fish tmux gnuplot
 

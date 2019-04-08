@@ -1,2 +1,1 @@
-cd ~
-rmdir Public Videos Music Templates Pictures
+rmdir ~/Public ~/Videos ~/Music ~/Templates ~/Pictures
