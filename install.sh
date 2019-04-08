@@ -1,7 +1,7 @@
 sudo apt-get install -y vim emacs24
 #echo "alias suspend='systemctl suspend -i'" >> ~/.bashrc
 
-#sudo apt-get install -y gnome-tweak-tool curl
+sudo apt-get install -y gnome-tweak-tool curl
 #sudo apt-get install -y ibus-mozc
 # GUIでmozcの追加
 
@@ -22,7 +22,7 @@ sudo apt-get install -y zsh fish tmux gnuplot
 
 #sudo snap install slack --classic
 #sudo snap install heroku --classic
-#sudo apt-get install -y chromium-browser
+sudo apt-get install -y chromium-browser
 
 source ~/.bashrc
 
@@ -35,3 +35,8 @@ source ~/.bashrc
 # その他
 # Nodejsのインストール
 # LINEのインストール
+
+
+# ROS
+# sudo apt-get install ros-kinetic-desktop-full
+# sudo apt-get install python-catkin-tools
