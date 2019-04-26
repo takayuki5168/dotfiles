@@ -1,32 +1,35 @@
 #!/bin/bash
 
 # for user real robot
-function pr1012() {
+function pr1012 () {
     rossetmaster pr1012
     rossetip
 }
-function pr1040() {
+function pr1040 () {
     rossetmaster pr1040
     rossetip
 }
-function fetch15() {
+function fetch15 () {
     rossetmaster fetch15
     rossetip
 }
-function hrp2017() {
+function hrp2017 () {
     rossethrp2017
     rossetip
 }
 
 
 # for workspace
-function pr2() {
+function ros () {
+    source /opt/ros/kinetic/setup.bash
+}
+function pr2 () {
     source ~/ros/kinetic/devel/setup.bash
 }
-function hiro() {
+function hiro () {
     source ~/ros/hiro_ws/devel/setup.bash
 }
-function jaxon() {
+function jaxon () {
     source ~/ros/jaxon_ws/devel/setup.bash
 }
 
