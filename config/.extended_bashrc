@@ -1,2 +1,4 @@
+#!/bin/bash
+
 # for ROS
 source ~/.ros_bashrc
