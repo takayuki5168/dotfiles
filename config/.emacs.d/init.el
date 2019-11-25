@@ -2,18 +2,6 @@
 (load-theme 'manoj-dark t)   ;; color theme
 (setq backup-directory-alist '((".*"."~/.ehist")))   ;; remove backup file
 
-;; trr
-(add-to-list 'load-path "~/.emacs.d/.emacs-trr")
-(require 'trr)
-
-;; euslime
-(add-to-list 'load-path "/home/takayuki/private/setting/euslime/slime")
-(add-to-list 'load-path "/home/takayuki/private/setting/euslime/euslime")
-(require 'slime-autoloads)
-(require 'euslime)
-(setq slime-contribs '(slime-fancy slime-banner slime-repl-ansi-color))
-(setq inferior-lisp-program "sbcl")
-
 ;; rosemacs
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
 (require 'rosemacs-config)
