@@ -1,10 +1,17 @@
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (global-set-key "\C-h" 'delete-backward-char)   ;; ctrl+h as back-space
 (load-theme 'manoj-dark t)   ;; color theme
 (setq backup-directory-alist '((".*"."~/.ehist")))   ;; remove backup file
-
-;; rosemacs
-(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
-(require 'rosemacs-config)
 
 ;; visualize tab and space
 (require 'whitespace)
@@ -27,3 +34,26 @@
 
 ;; show line index
 (global-linum-mode t)
+
+;; rosemacs
+(add-to-list 'load-path "/opt/ros/noetic/share/emacs/site-lisp")
+(require 'rosemacs-config)
+
+;; clang format
+;; (load "/usr/share/emacs/site-lisp/clang-format-10/clang-format.el")
+
+;; (defun clang-format-save-hook-for-this-buffer ()
+;;   "Create a buffer local save hook."
+;;   (add-hook 'before-save-hook
+;;     (lambda ()
+;;       (progn
+;;         (when (locate-dominating-file "." ".clang-format")
+;;           (clang-format-buffer))
+;;         ;; Continue to save.
+;;         nil))
+;;     nil
+;;     ;; Buffer local hook.
+;;     t))
+
+;; (add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
+;; (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))

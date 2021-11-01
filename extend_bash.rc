@@ -1,0 +1,6 @@
+source ~/.ros1_bashrc
+source ~/.ros2_bashrc
+
+#source /opt/ros/galactic/setup.bash
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export LD_LIBRARY_PATH="/usr/local/libtorch/lib:$LD_LIBRARY_PATH"

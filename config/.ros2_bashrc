@@ -1,0 +1,161 @@
+# source
+function galactic () {
+  source /opt/ros/galactic/setup.bash
+  export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+  export ROS_DOMAIN_ID=65
+  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
+  #export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}():{line_number})"
+}
+
+function autoware () {
+  galactic
+  source ~/colcon_ws/autoware.proj/install/setup.bash
+}
+
+function autoware.main () {
+  galactic
+  source ~/colcon_ws/autoware.proj.main/install/setup.bash
+}
+
+function autoware.develop () {
+  galactic
+  source ~/colcon_ws/autoware.proj.develop/install/setup.bash
+}
+
+function autoware.jpntaxi () {
+  galactic
+  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
+  source ~/colcon_ws/autoware.proj.jpntaxi/install/setup.bash
+}
+
+function autoware.gsm8 () {
+  galactic
+  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
+  source ~/colcon_ws/autoware.proj.gsm8/install/setup.bash
+}
+
+function autoware_eva () {
+  galactic
+  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
+  source ~/colcon_ws/autoware.proj.eva.ros2/install/setup.bash
+}
+
+# ros2cd
+_ros2pkglist() {
+    _init_completion || return
+    COMPREPLY=( $(compgen -W '$(ros2 pkg list)' -- "$cur") )
+}
+
+function ros2cd () {
+    local ws_path prefix path src_path pkg_path
+    prefix=${1%/}
+    if [ $prefix ]; then
+        path=`ros2 pkg prefix ${prefix} --share`
+        src_path=`readlink -f $path/package.xml`
+        pkg_path=(${src_path//package/ })
+        if [ $pkg_path != "/" ]; then
+          cd ${pkg_path[0]}
+        fi
+    else
+      ws_path=(${COLCON_PREFIX_PATH//install/ })
+      cd $ws_path
+    fi
+}
+complete -F _ros2pkglist -o "nospace" "ros2cd"
+
+# github
+function ros2github () {
+    local prefix path src_path pkg_path rel_pkg_path
+    prefix=${1%/}
+    if [ $prefix ]; then
+        echo $prefix
+        path=`ros2 pkg prefix ${prefix} --share`
+        echo $path
+        src_path=`readlink -f $path/package.xml`
+        echo $src_path
+        pkg_path=(${src_path//package/ })
+        echo $pkg_path
+        rel_pkg_path=(${pkg_path//autoware.iv/ })
+        echo $rel_pkg_path
+        if [ $rel_pkg_path != "/" ]; then
+          google-chrome https://github.com/tier4/autoware.iv/tree/develop/${rel_pkg_path[1]}
+        fi
+    else
+       google-chrome https://github.com/tier4/autoware.iv/tree/develop/
+    fi
+}
+complete -F _ros2pkglist -o "nospace" "ros2github"
+
+# build
+function ros2build () {
+  local prev_path ws_path
+  prev_path=$(pwd)
+  ws_path=(${COLCON_PREFIX_PATH//install/ })
+  cd $ws_path
+
+  # ccache
+  if command -v ccache > /dev/null 2>&1; then
+    export CCACHE_DIR=$HOME/.ccache
+    export CC="/usr/lib/ccache/gcc"
+    export CXX="/usr/lib/ccache/g++"
+  fi
+
+  if [ $1 ]; then
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-select $@ --continue-on-error
+  else
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --continue-on-error
+  fi
+
+  cd $prev_path
+}
+complete -F _ros2pkglist -o "nospace" "ros2build"
+
+# test
+function ros2test () {
+  local prev_path ws_path
+  prev_path=$(pwd)
+  ws_path=(${COLCON_PREFIX_PATH//install/ })
+  cd $ws_path
+
+  colcon test-result --delete-yes
+  colcon test --event-handlers console_cohesion+ --packages-select $1
+  colcon test-result --verbose
+
+  cd $prev_path
+}
+complete -F _ros2pkglist -o "nospace" "ros2test"
+
+# psim
+function psim_autoware () {
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=lexus sensor_model:=aip_xx1 $2
+}
+
+function psim_autoware.jpntaxi () {
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=jpntaxi sensor_model:=aip_xx1 $2
+}
+
+function psim_autoware.gsm8 () {
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=gsm8 sensor_model:=aip_x2 $2
+}
+
+function engage_autoware () {
+  ros2 topic pub /autoware/engage autoware_vehicle_msgs/msg/Engage '{engage: True}' -1
+}
+
+function kill_autoware () {
+  pkill ros2
+  pkill rviz2
+  ps aux | grep python3 | grep ros2 | grep -v grep | awk '{ print "kill ", $2 }' | sh
+  ps aux | grep python3 | grep rqt_reconfigure | grep -v grep | awk '{ print "kill ", $2 }' | sh
+  ps aux | grep component_container | grep -v grep | awk '{ print "kill ", $2 }' | sh
+  ps aux | grep robot_state_publisher | grep -v grep | awk '{ print "kill ", $2 }' | sh
+  ps aux | grep topic_tools/relay | grep -v grep | awk '{ print "kill ", $2 }' | sh
+}
+
+function scenario_autoware () {
+  if [ $1 ]; then
+    ros2 launch scenario_test_runner scenario_test_runner.launch.py scenario:='$(find-pkg-share scenario_test_runner)'/test/scenario/$1 sensor_model:=aip_xx1 vehicle_model:=lexus record:=false
+  else
+    ros2 launch scenario_test_runner scenario_test_runner.launch.py scenario:='$(find-pkg-share scenario_test_runner)/test/scenario/autoware-simple.yaml' sensor_model:=aip_xx1 vehicle_model:=lexus record:=false
+  fi
+}
