@@ -35,10 +35,6 @@
 ;; show line index
 (global-linum-mode t)
 
-;; rosemacs
-(add-to-list 'load-path "/opt/ros/noetic/share/emacs/site-lisp")
-(require 'rosemacs-config)
-
 ;; clang format
 ;; (load "/usr/share/emacs/site-lisp/clang-format-10/clang-format.el")
 

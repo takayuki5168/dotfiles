@@ -2,7 +2,8 @@
 function galactic () {
   source /opt/ros/galactic/setup.bash
   export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-  export ROS_DOMAIN_ID=65
+  # export ROS_DOMAIN_ID=67
+  export ROS_LOCALHOST_ONLY=1
   export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
   #export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}():{line_number})"
 }
@@ -17,6 +18,11 @@ function autoware.main () {
   source ~/colcon_ws/autoware.proj.main/install/setup.bash
 }
 
+function autoware.auto () {
+  galactic
+  source ~/autoware.proj.auto/install/setup.bash
+}
+
 function autoware.develop () {
   galactic
   source ~/colcon_ws/autoware.proj.develop/install/setup.bash
@@ -24,20 +30,17 @@ function autoware.develop () {
 
 function autoware.jpntaxi () {
   galactic
-  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
   source ~/colcon_ws/autoware.proj.jpntaxi/install/setup.bash
 }
 
 function autoware.gsm8 () {
   galactic
-  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
   source ~/colcon_ws/autoware.proj.gsm8/install/setup.bash
 }
 
-function autoware_eva () {
+function autoware.eva () {
   galactic
-  export RCUTILS_COLORIZED_OUTPUT=1 # to colorize warn/error stream
-  source ~/colcon_ws/autoware.proj.eva.ros2/install/setup.bash
+  source ~/autoware.proj.eva/install/setup.bash
 }
 
 # ros2cd
@@ -127,19 +130,27 @@ complete -F _ros2pkglist -o "nospace" "ros2test"
 
 # psim
 function psim_autoware () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=lexus sensor_model:=aip_xx1 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=lexus sensor_model:=aip_xx1 $2
 }
 
 function psim_autoware.jpntaxi () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=jpntaxi sensor_model:=aip_xx1 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=jpntaxi sensor_model:=aip_xx1 $2
 }
 
 function psim_autoware.gsm8 () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=/home/takayuki/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=gsm8 sensor_model:=aip_x2 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=gsm8 sensor_model:=aip_x2 $2
+}
+
+function psim_autoware.eva () {
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=ymc_golfcart_proto2 sensor_model:=aip_x1 $2
 }
 
 function engage_autoware () {
   ros2 topic pub /autoware/engage autoware_vehicle_msgs/msg/Engage '{engage: True}' -1
+}
+
+function engage_autoware.auto () {
+  ros2 topic pub /autoware/engage autoware_auto_vehicle_msgs/msg/Engage '{engage: True}' -1
 }
 
 function kill_autoware () {
