@@ -149,6 +149,17 @@ function psim_autoware.eva () {
   ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/AutonomousDrivingScenarios/map/$1/ vehicle_model:=ymc_golfcart_proto2 sensor_model:=aip_x1 $2
 }
 
+# simple path
+function pub_path () {
+  python3 .simple_path.py $#
+}
+
+# spawn obstacle
+function spwan_obstacle () {
+  ros2 run dummy_obstacle_spawner dummy_obstacle_spawner_node
+}
+
+# engage
 function engage_autoware () {
   ros2 topic pub /autoware/engage autoware_vehicle_msgs/msg/Engage '{engage: True}' -1
 }
@@ -157,6 +168,7 @@ function engage_autoware.auto () {
   ros2 topic pub /autoware/engage autoware_auto_vehicle_msgs/msg/Engage '{engage: True}' -1
 }
 
+# kill
 function kill_autoware () {
   pkill ros2
   pkill rviz2
@@ -167,6 +179,7 @@ function kill_autoware () {
   ps aux | grep topic_tools/relay | grep -v grep | awk '{ print "kill ", $2 }' | sh
 }
 
+# scenario
 function scenario_autoware () {
   if [ $1 ]; then
     ros2 launch scenario_test_runner scenario_test_runner.launch.py scenario:='$(find-pkg-share scenario_test_runner)'/test/scenario/$1 sensor_model:=aip_xx1 vehicle_model:=lexus record:=false
