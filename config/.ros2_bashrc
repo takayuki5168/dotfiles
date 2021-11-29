@@ -8,6 +8,10 @@ function galactic () {
   #export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity} {time}] [{name}]: {message} ({function_name}():{line_number})"
 }
 
+function configure_multicast () {
+  sudo ifconfig lo multicast
+}
+
 function autoware () {
   galactic
   source ~/autoware.proj/install/setup.bash
