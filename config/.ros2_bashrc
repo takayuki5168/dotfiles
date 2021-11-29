@@ -10,12 +10,12 @@ function galactic () {
 
 function autoware () {
   galactic
-  source ~/colcon_ws/autoware.proj/install/setup.bash
+  source ~/autoware.proj/install/setup.bash
 }
 
 function autoware.main () {
   galactic
-  source ~/colcon_ws/autoware.proj.main/install/setup.bash
+  source ~/autoware.proj.main/install/setup.bash
 }
 
 function autoware.auto () {
@@ -25,17 +25,17 @@ function autoware.auto () {
 
 function autoware.develop () {
   galactic
-  source ~/colcon_ws/autoware.proj.develop/install/setup.bash
+  source ~/autoware.proj.develop/install/setup.bash
 }
 
 function autoware.jpntaxi () {
   galactic
-  source ~/colcon_ws/autoware.proj.jpntaxi/install/setup.bash
+  source ~/autoware.proj.jpntaxi/install/setup.bash
 }
 
 function autoware.gsm8 () {
   galactic
-  source ~/colcon_ws/autoware.proj.gsm8/install/setup.bash
+  source ~/autoware.proj.gsm8/install/setup.bash
 }
 
 function autoware.eva () {
@@ -130,19 +130,19 @@ complete -F _ros2pkglist -o "nospace" "ros2test"
 
 # psim
 function psim_autoware () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=lexus sensor_model:=aip_xx1 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/AutonomousDrivingScenarios/map/$1/ vehicle_model:=lexus sensor_model:=aip_xx1 $2
 }
 
 function psim_autoware.jpntaxi () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=jpntaxi sensor_model:=aip_xx1 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/AutonomousDrivingScenarios/map/$1/ vehicle_model:=jpntaxi sensor_model:=aip_xx1 $2
 }
 
 function psim_autoware.gsm8 () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=gsm8 sensor_model:=aip_x2 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/AutonomousDrivingScenarios/map/$1/ vehicle_model:=gsm8 sensor_model:=aip_x2 $2
 }
 
 function psim_autoware.eva () {
-  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/colcon_ws/AutonomousDrivingScenarios/map/$1/ vehicle_model:=ymc_golfcart_proto2 sensor_model:=aip_x1 $2
+  ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/AutonomousDrivingScenarios/map/$1/ vehicle_model:=ymc_golfcart_proto2 sensor_model:=aip_x1 $2
 }
 
 function engage_autoware () {
